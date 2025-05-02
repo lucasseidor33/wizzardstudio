@@ -1,5 +1,6 @@
 import { Check } from "lucide-react";
 import Link from "next/link"
+import { useLanguage } from "../context/LanguageContext";
 
 const plans = [
   {
@@ -66,6 +67,8 @@ const plans = [
 
 
 export default function PricingPlans() {
+    const { t } = useLanguage();
+  
   return (
     <div
     id="planes"
@@ -80,13 +83,13 @@ export default function PricingPlans() {
       {/* Contenido */}
       <div className="relative container px-4 mx-auto">
         <div className="max-w-3xl mx-auto text-center mb-10 text-white">
-          <h2 className="text-3xl font-bold tracking-tight">Planes de Suscripción</h2>
-          <p className="mt-4 text-white/80">Elige el plan que mejor se adapte a tus necesidades</p>
+          <h2 className="text-3xl font-bold tracking-tight">{t?.cards?.title}</h2>
+          <p className="mt-4 text-white/80">{t?.cards?.subtitle}</p>
         </div>
 
         {/* Grid de 3 columnas para los planes */}
         <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto text-white">
-          {plans.map((plan) => (
+          {t?.cards?.plans.map((plan: { name: string; badge?: string; description: string; price: number | string; features: string[]; href?: string }) => (
             <div
               key={plan.name}
               className="flex flex-col relative border border-white/20 rounded-lg bg-black/30 hover:bg-black/40 transition-all shadow-md"

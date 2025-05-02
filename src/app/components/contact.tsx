@@ -3,8 +3,12 @@
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
+import { useLanguage } from "../context/LanguageContext";
 
 export default function ContactCta() {
+
+    const { t } = useLanguage();
+  
   return (
     <section
     id="contact"
@@ -28,12 +32,11 @@ export default function ContactCta() {
             transition={{ duration: 0.8 }}
             className="text-4xl md:text-5xl font-bold"
             style={{
-              fontFamily: "'Playfair Display', serif",
               letterSpacing: "0px",
               textShadow: "0 4px 12px rgba(0, 0, 0, 0.6)",
             }}
           >
-            ¿Listo para hechizar tu presencia digital?
+           {t?.contact?.title}
           </motion.h2>
 
           <motion.p
@@ -41,26 +44,24 @@ export default function ContactCta() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.7 }}
             className="text-white/80 text-lg md:text-xl"
-            style={{
-              fontFamily: "'Playfair Display', serif",
-            }}
+           
           >
-            Hablemos por WhatsApp y demos el primer paso juntos.
-          </motion.p>
+           {t?.contact?.subtitle}
+           </motion.p>
 
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Link
-              href="https://wa.me/5493855079729?text=Hola%2C%20te%20contacto%20desde%20Wizzard%20Studio%20porque%20estoy%20interesado%20en%20planificar%20mi%20pr%C3%B3xima%20p%C3%A1gina%20web.%20%C2%BFPodemos%20hablar%3F"
+          <Link
+  href="https://wa.me/5493855079729?text=Hola%2C%20te%20contacto%20desde%20Wizzard%20Studio%20porque%20estoy%20interesado%20en%20planificar%20mi%20pr%C3%B3xima%20p%C3%A1gina%20web.%20%C2%BFPodemos%20hablar%3F"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-block border border-white text-white hover:bg-white hover:text-black transition-colors duration-300 px-6 py-3 rounded-full font-semibold shadow-md backdrop-blur-sm"
+>
+  {t.contact?.button}
+</Link>
 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block bg-green-600 hover:bg-green-700 transition px-6 py-3 rounded-full font-semibold text-white shadow-lg"
-            >
-              Hablar por WhatsApp
-            </Link>
           </motion.div>
         </div>
 

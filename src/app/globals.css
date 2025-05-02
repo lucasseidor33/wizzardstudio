@@ -1,18 +1,46 @@
-/* ✅ Importaciones primero */
 @import "tailwindcss";
 
+/* ✅ Variables y fuentes */
+:root {
+  --font-body: var(--font-ui);
+}
 
+html {
+  scroll-behavior: smooth;
 
-/* Colores globales (modo claro por defecto) */
-body::before {
+  /* FONDO EN HTML para mayor estabilidad cross-device */
+  background-image: url('/img/background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* se desactiva en mobile abajo */
+}
+
+/* Overlay oscuro detrás del fondo (opcional) */
+html::before {
   content: "";
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.8); /* negro con 60% de opacidad */
-  z-index: -1; /* detrás del contenido */
+  background-color: rgba(0, 0, 0, 0.8); /* negro con 80% de opacidad */
+  z-index: -1;
   pointer-events: none;
 }
-/* Dark Mode */
+
+/* Estilos base */
+body {
+  font-family: var(--font-body);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  color: var(--foreground);
+  min-height: 100vh;
+}
+
+h1, h2, h3, .display {
+  font-family: var(--font-display);
+}
+
+/* Colores base */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -20,21 +48,9 @@ body::before {
   }
 }
 
-/* Scroll suave */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Estilos base del body */
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: 'Inter', sans-serif;
-
-  /* Fondo mágico */
-   background-image: url('/img/background.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+/* Corrige comportamiento en móviles */
+@media (max-width: 768px) {
+  html {
+    background-attachment: scroll;
+  }
 }

@@ -3,36 +3,11 @@
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-
-interface Project {
-  id: number
-  title: string
-  description: string
-  media: string
-  type: "video" | "gif"
-  link?: string
-}
-
-const projects: Project[] = [
-  {
-    id: 1,
-    title: "Caobas marketing agency",
-    description: "Una tienda online totalmente responsive con carrito de compras.",
-    media: "/video/project1.mp4",
-    type: "video",
-    link: "https://caobas.vercel.app",
-  },
-  {
-    id: 2,
-    title: "Mcstudio beauty salon",
-    description: "Portfolio personal con transiciones animadas y diseño moderno.",
-    media: "/video/project2.mp4",
-    type: "video",
-    link: "https://mcstudio-2ebq.vercel.app",
-  },
-]
+import { useLanguage } from "../context/LanguageContext"
 
 export default function ProjectsShowcase() {
+  const { t } = useLanguage()
+  const projects = t.caroussel.projects
   const [currentProject, setCurrentProject] = useState(0)
 
   useEffect(() => {
@@ -40,7 +15,7 @@ export default function ProjectsShowcase() {
       setCurrentProject((prev) => (prev === projects.length - 1 ? 0 : prev + 1))
     }, 7000)
     return () => clearInterval(interval)
-  }, [])
+  }, [projects.length])
 
   const nextProject = () => {
     setCurrentProject((prev) => (prev === projects.length - 1 ? 0 : prev + 1))
@@ -59,18 +34,11 @@ export default function ProjectsShowcase() {
           transition={{ duration: 0.7 }}
           className="flex flex-col items-start text-left mb-12"
         >
-          <h2
-            className="text-4xl md:text-5xl font-extrabold tracking-wider text-white"
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              letterSpacing: "0px",
-              textShadow: "0 4px 12px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0, 0, 0, 0.3)",
-            }}
-          >
-            Nuestro Trabajo
+          <h2 className="text-4xl md:text-5xl font-extrabold tracking-wider text-white">
+            {t.caroussel.title}
           </h2>
           <p className="mt-4 max-w-3xl text-white/80 text-base md:text-lg leading-relaxed">
-            Creamos experiencias digitales excepcionales que transforman ideas en realidades impactantes.
+            {t.caroussel.subtitle}
           </p>
         </motion.div>
 
@@ -90,7 +58,7 @@ export default function ProjectsShowcase() {
                 </video>
               ) : (
                 <img
-                  src={projects[currentProject].media || "/placeholder.svg"}
+                  src={projects[currentProject].media}
                   alt={projects[currentProject].title}
                   className="w-full h-full object-cover"
                 />
@@ -118,8 +86,8 @@ export default function ProjectsShowcase() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-4 md:mt-0 inline-block px-5 py-2 text-sm font-medium rounded-full border border-white/30 text-white hover:bg-white/10 transition self-center md:self-auto"
-                >
-                Ir al proyecto!
+              >
+                {t.caroussel.buttonProject}
               </a>
             )}
           </motion.div>
@@ -141,102 +109,3 @@ export default function ProjectsShowcase() {
     </section>
   )
 }
-
-
-
-// "use client"
-
-// import { useState, useEffect } from "react"
-// import Image from "next/image"
-// import { motion, AnimatePresence } from "framer-motion"
-
-// const projects = [
-//   {
-//     id: 1,
-//     title: "Caobas Marketing Agency",
-//     description: "Landing page para empresa de maderas. Diseño limpio, responsive y optimizado para SEO local.",
-//     image: "/img/card1.png",
-//     link: "https://caobas.vercel.app/",
-//   },
-//   {
-//     id: 2,
-//     title: "Mc Studio",
-//     description: "Sitio de salon de belleza profesional ",
-//     image: "/img/card2.png",
-//     link: "https://mcstudio-2ebq.vercel.app/",
-//   },
-// ]
-
-// export default function PortfolioSlider() {
-//   const [current, setCurrent] = useState(0)
-//   const length = projects.length
-
-//   useEffect(() => {
-//     const interval = setInterval(() => {
-//       setCurrent((prev) => (prev === length - 1 ? 0 : prev + 1))
-//     }, 6000)
-//     return () => clearInterval(interval)
-//   }, [length])
-
-//   return (
-//     <section className="relative w-full min-h-screen bg-gradient-to-b from-black to-gray-900 text-white py-24 px-4">
-//       <div className="max-w-6xl mx-auto">
-//         {/* Título de sección */}
-//         <div className="text-center mb-20">
-//           <h2 className="text-5xl font-extrabold tracking-tight mb-4">
-//             Transformaciones digitales que marcan la diferencia
-//           </h2>
-//           <p className="text-gray-300 text-lg max-w-2xl mx-auto">
-//             Una selección de los trabajos que he diseñado y desarrollado para marcas, negocios locales y clientes reales.
-//           </p>
-//         </div>
-
-//         {/* Slider animado */}
-//         <AnimatePresence mode="wait">
-//           {projects.map((project, index) => (
-//             index === current && (
-//               <motion.div
-//                 key={project.id}
-//                 initial={{ opacity: 0, y: 40 }}
-//                 animate={{ opacity: 1, y: 0 }}
-//                 exit={{ opacity: 0, y: -40 }}
-//                 transition={{ duration: 1, ease: "easeInOut" }}
-//                 className="flex flex-col md:flex-row items-center gap-12 mb-10"
-//               >
-//                 {/* Imagen */}
-//                 <motion.div
-//                   initial={{ scale: 0.95, opacity: 0 }}
-//                   animate={{ scale: 1, opacity: 1 }}
-//                   transition={{ duration: 1, ease: "easeInOut" }}
-//                   className="w-full md:w-1/2"
-//                 >
-//                   <Image
-//                     src={project.image}
-//                     alt={project.title}
-//                     width={600}
-//                     height={400}
-//                     className="rounded-xl shadow-2xl object-cover border border-white/10"
-//                   />
-//                 </motion.div>
-
-//                 {/* Texto */}
-//                 <div className="w-full md:w-1/2 text-left space-y-6">
-//                   <h3 className="text-4xl font-bold leading-tight">{project.title}</h3>
-//                   <p className="text-gray-300 text-lg leading-relaxed">{project.description}</p>
-//                   <a
-//                     href={project.link}
-//                     target="_blank"
-//                     rel="noopener noreferrer"
-//                     className="inline-block border border-white text-white font-light px-6 py-3 rounded-lg transition hover:bg-white hover:text-black"
-//                   >
-//                     Ver proyecto
-//                   </a>
-//                 </div>
-//               </motion.div>
-//             )
-//           ))}
-//         </AnimatePresence>
-//       </div>
-//     </section>
-//   )
-// }
