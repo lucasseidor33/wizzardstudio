@@ -29,9 +29,7 @@ export default function FlowiseWidget() {
     chatflowConfig={{
         /* Chatflow Config */
     }}
-    observersConfig={{
-        /* Observers Config */
-    }}
+  
     theme={{    
         button: {
             backgroundColor: '#8897b7',
@@ -71,16 +69,15 @@ export default function FlowiseWidget() {
             showAgentMessages: true,
             title: 'Wizzard assistant',
             titleAvatarSrc: 'https://github.com/lucasseidor33/wizzardstudio/blob/main/public/img/ChatGPT%20Image%2025%20abr%202025,%2009_32_09%20p.m..png?raw=true',
-            welcomeMessage: 'Hello! This is custom welcome message',
-            errorMessage: 'This is a custom error message',
+            welcomeMessage: 'Hola! , En que puedo ayudarte? ',
+            errorMessage: 'Lo siento en este momento el agente no esta disponible',
             backgroundColor: '#ffffff',
             backgroundImage: 'enter image path or link',
             height: 500,
             width: 400,
             fontSize: 15,
             starterPrompts: [
-                "What is a bot?",
-                "Who are you?"
+                "Que es Wizzard studio?"
             ],
             starterPromptFontSize: 15,
             clearChatOnReload: false,
@@ -106,9 +103,9 @@ export default function FlowiseWidget() {
                 maxChars: 50,
                 maxCharsWarningMessage: 'You exceeded the characters limit. Please input less than 50 characters.',
                 autoFocus: true,
-                sendMessageSound: true,
-                sendSoundLocation: 'send_message.mp3',
-                receiveMessageSound: true,
+                sendMessageSound: false,
+            //    sendSoundLocation: 'send_message.mp3',
+                receiveMessageSound: false,
           //     receiveSoundLocation: 'receive_message.mp3'
             },
             feedback: {
