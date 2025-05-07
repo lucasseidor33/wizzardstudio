@@ -1,8 +1,9 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
-import en from "@/app/locales/en";
-import es from "@/app/locales/es";
+import en from "@/app/locales/en.js";
+import es from "@/app/locales/es.js";
+
 
 type LanguageContextType = {
   language: string;
